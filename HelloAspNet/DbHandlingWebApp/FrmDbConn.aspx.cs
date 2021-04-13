@@ -19,14 +19,18 @@ namespace DbHandlingWebApp
             {
                 if (conn.State == System.Data.ConnectionState.Closed) conn.Open();
 
-                //LblResult.Text = conn.State.ToString();
+                //LblResult.Text = conn.State.ToString(); // 상태확인
+
                 var query = @"Insert Memos 
                               Values
                                 (	
-	                                '성홍렬', 'ghd0276@naver.com.com', '성홍렬입니다.'
+	                                '성홍렬', 'ghd0276@naver.com', '성홍렬입니다.'
 	                                , GetDate(), '127.0.0.1'
                                 )";
 
+                /*var query = @"UPDATE [TestDB].[dbo].[Memos]
+                               SET Email = 'ghd0276@naver.com'
+                             WHERE Num = '2'";*/
 
                 try
                 {
