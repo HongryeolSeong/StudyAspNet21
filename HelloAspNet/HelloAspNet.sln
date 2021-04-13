@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidationWebApp", "Validat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateWebApp", "TemplateWebApp\TemplateWebApp.csproj", "{3B4418A6-5DA2-40F1-B670-3D330B0D2A9B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMngWebApp", "StateMngWebApp\StateMngWebApp.csproj", "{A2C44E90-489D-4604-99F5-95BF260CD15B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbHandlingWebApp", "DbHandlingWebApp\DbHandlingWebApp.csproj", "{82CBAC65-F397-4415-8B46-6077B1DD9FFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{3B4418A6-5DA2-40F1-B670-3D330B0D2A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B4418A6-5DA2-40F1-B670-3D330B0D2A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B4418A6-5DA2-40F1-B670-3D330B0D2A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C44E90-489D-4604-99F5-95BF260CD15B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C44E90-489D-4604-99F5-95BF260CD15B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C44E90-489D-4604-99F5-95BF260CD15B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C44E90-489D-4604-99F5-95BF260CD15B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82CBAC65-F397-4415-8B46-6077B1DD9FFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82CBAC65-F397-4415-8B46-6077B1DD9FFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82CBAC65-F397-4415-8B46-6077B1DD9FFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82CBAC65-F397-4415-8B46-6077B1DD9FFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
