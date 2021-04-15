@@ -28,12 +28,29 @@ namespace Helpers.Test
             Assert.AreEqual(expected, actual);
         }
 
+        [Ignore]
         [TestMethod]
         public void AddTest()
         {
             var expected = 10;
             var actual = (5 + 5);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsPhotoTest()
+        {
+            var imagePath = @"D:\GitRepository\StudyDesktopApp\WPFApp\WpfExecutiveBank\SnakeBiteGame\main.png";
+            bool result = BoardLibrary.IsPhoto(imagePath);
+            Assert.IsTrue(result, "file extension must be png, jpg, gif");
+        }
+
+        [TestMethod]
+        public void IsNotPhotoTest()
+        {
+            var imagePath = @"D:\GitRepository\StudyDesktopApp\WPFApp\WpfExecutiveBank\SnakeBiteGame\main.pdf";
+            bool result = BoardLibrary.IsPhoto(imagePath);
+            Assert.IsFalse(result, "file extension must be png, jpg, gif");
         }
     }
 }
