@@ -106,7 +106,7 @@ namespace DotNetNote.Board
                 }
             }
 
-            return false; // 보안코드 일치 X
+            return false; // 보안코드 일치 
         }
     }
 }
