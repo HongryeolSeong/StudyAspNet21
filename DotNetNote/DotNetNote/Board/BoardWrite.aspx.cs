@@ -13,12 +13,20 @@ namespace DotNetNote.Board
         public BoardWriteFormType FormType { get; set; } = BoardWriteFormType.Write; // 기본값 : 글쓰기
 
         private string _Id; // 리스트에서 넘겨주는 번호
+        //private string _Mode; // 뷰에서 넘겨주는 모드 값 // Edit, Reply
 
+        #region 이벤트 핸들러
         protected void Page_Load(object sender, EventArgs e)
         {
             _Id = Request["Id"]; // GET / POST 모두 다 받음
+
             if (!Page.IsPostBack)
             {
+                ViewState["Mode"] = Request["Mode"]; // Edit
+                if (ViewState["Mode"].ToString() == "Edit") FormType = BoardWriteFormType.Modify;
+                else if (ViewState["Mode"].ToString() == "Reply") FormType = BoardWriteFormType.Reply;
+                else FormType = BoardWriteFormType.Write;
+
                 switch (FormType)
                 {
                     case BoardWriteFormType.Write:
@@ -38,13 +46,17 @@ namespace DotNetNote.Board
 
         protected void chkUpload_CheckedChanged(object sender, EventArgs e)
         {
-
+            pnlFile.Visible = !pnlFile.Visible;
         }
 
         protected void btnWrite_Click(object sender, EventArgs e)
         {
             if (IsImageTextCorrect())
             {
+                if (ViewState["Mode"].ToString() == "Edit") FormType = BoardWriteFormType.Modify;
+                else if (ViewState["Mode"].ToString() == "Reply") FormType = BoardWriteFormType.Reply;
+                else FormType = BoardWriteFormType.Write;
+
                 // TODO : 파일업로드
 
                 Note note = new Note();
@@ -69,10 +81,21 @@ namespace DotNetNote.Board
                         Response.Redirect("BoardList.aspx");
                         break;
                     case BoardWriteFormType.Modify:
+                        note.ModifyIp = Request.UserHostAddress;
+
+                        // TODO : File 처리
+
+                        if (repo.UpdateNote(note) > 0) Response.Redirect($"BoardView.aspx?Id={_Id}");
+                        else lblError.Text = "업데이트 실패, 암호를 확인하세요.";
                         break;
                     case BoardWriteFormType.Reply:
+                        note.ParentNum = Convert.ToInt32(_Id);
+                        repo.ReplyNote(note);
+                        Response.Redirect("BoardList.aspx");
                         break;
                     default:
+                        repo.Add(note);
+                        Response.Redirect("BoardList.aspx");
                         break;
                 }
             }
@@ -81,15 +104,38 @@ namespace DotNetNote.Board
                 lblError.Text = "보안코드가 틀립니다. 다시 입력하세요.";
             }
         }
+        #endregion
+
+        #region 사용자 메서드
+        private void DisplayDataForModify()
+        {
+            var repo = new DbRepository();
+            Note note = repo.GetNoteById(Convert.ToInt32(_Id));
+
+            txtName.Text = note.Name;
+            txtEmail.Text = note.Email;
+            txtHomepage.Text = note.Homepage;
+            txtTitle.Text = note.Title;
+            txtContent.Text = note.Content;
+
+            // Encoding
+            string encoding = note.Encoding;
+            if (encoding == "Text") rdoEncoding.SelectedIndex = 0;
+            else if (encoding == "Mixed") rdoEncoding.SelectedIndex = 2;
+            else rdoEncoding.SelectedIndex = 1;
+
+            // TODO : 파일처리
+
+        }
 
         private void DisplayDataForReply()
         {
-            throw new NotImplementedException();
-        }
+            var repo = new DbRepository();
+            Note note = repo.GetNoteById(Convert.ToInt32(_Id));
 
-        private void DisplayDataForModify()
-        {
-            throw new NotImplementedException();
+            txtTitle.Text = $"답변 : {note.Title}";
+            txtContent.Text = $"\n\n작성일 : {note.PostDate}, 작성자 : '{note.Name}'\n----------------------------------------\n>" +
+                $"{note.Content.Replace("\n", "\n>")}\n----------------------------------------\n";
         }
 
         private bool IsImageTextCorrect()
@@ -108,5 +154,6 @@ namespace DotNetNote.Board
 
             return false; // 보안코드 일치 
         }
+        #endregion
     }
 }
