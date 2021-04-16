@@ -14,6 +14,8 @@ namespace DotNetNote.Board
 
         // 검색모드 : true, 보통 : false
         public bool SearchMode { get; set; } = false;
+        public string SearchField { get; set; }
+        public string SearchQuery { get; set; }
 
         public int RecordCount = 0; // 총 레코드 수
 
@@ -26,10 +28,25 @@ namespace DotNetNote.Board
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // 검색모드 결정
+            SearchMode = (!string.IsNullOrEmpty(Request["SearchField"]) &&
+                            !string.IsNullOrEmpty(Request["SearchQuery"]));
+
+            if (SearchMode)
+            {
+                SearchField = Request["SearchField"];
+                SearchQuery = Request["SearchQuery"];
+            }
+
             if (!SearchMode)
             {
                 RecordCount = _repo.GetCountAll();
             }
+            else
+            {
+                RecordCount = _repo.GetCountBySearch(SearchField, SearchQuery);
+            }
+
             LblTotalRecord.Text = $"Total Record : {RecordCount}";
 
             if(Request["Page"] != null)
@@ -58,6 +75,11 @@ namespace DotNetNote.Board
             if (!SearchMode)
             {
                 GrvNotes.DataSource = _repo.GetAll(PageIndex); // 페이징 시작 : 0
+            }
+            else
+            {
+                // 검색 결과 리스트
+                GrvNotes.DataSource = _repo.GetSeachAll(PageIndex, SearchField, SearchQuery);
             }
 
             GrvNotes.DataBind(); // 데이터바인딩

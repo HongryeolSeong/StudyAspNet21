@@ -1,10 +1,7 @@
 ﻿using DotNetNote.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.IO;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DotNetNote.Board
 {
@@ -14,6 +11,10 @@ namespace DotNetNote.Board
 
         private string _Id; // 리스트에서 넘겨주는 번호
         //private string _Mode; // 뷰에서 넘겨주는 모드 값 // Edit, Reply
+
+        private string _BaseDir = ""; // GitRepository\StudyASPNET21\... Files
+        private string _FileName = ""; // 파일명
+        private int _FileSize = 0; // 파일 사이즈
 
         #region 이벤트 핸들러
         protected void Page_Load(object sender, EventArgs e)
@@ -57,7 +58,7 @@ namespace DotNetNote.Board
                 else if (ViewState["Mode"].ToString() == "Reply") FormType = BoardWriteFormType.Reply;
                 else FormType = BoardWriteFormType.Write;
 
-                // TODO : 파일업로드
+                UploadFile();
 
                 Note note = new Note();
                 note.Id = Convert.ToInt32(_Id); // 값이 없으면 0 반환
@@ -66,8 +67,8 @@ namespace DotNetNote.Board
                 note.Title = txtTitle.Text; // not null
                 note.Homepage = txtHomepage.Text;
                 note.Content = txtContent.Text; // not null
-                note.FileName = "";
-                note.FileSize = 0;
+                note.FileName = _FileName;
+                note.FileSize = _FileSize;
                 note.Password = txtPassword.Text;
                 note.PostIp = Request.UserHostAddress;
                 note.Encoding = rdoEncoding.SelectedValue; // not null // Text, Html, Mixed
@@ -82,9 +83,9 @@ namespace DotNetNote.Board
                         break;
                     case BoardWriteFormType.Modify:
                         note.ModifyIp = Request.UserHostAddress;
-
-                        // TODO : File 처리
-
+                        // File 처리
+                        note.FileName = ViewState["FileName"].ToString();
+                        note.FileSize = Convert.ToInt32(ViewState["FileSize"]);
                         if (repo.UpdateNote(note) > 0) Response.Redirect($"BoardView.aspx?Id={_Id}");
                         else lblError.Text = "업데이트 실패, 암호를 확인하세요.";
                         break;
@@ -102,6 +103,39 @@ namespace DotNetNote.Board
             else
             {
                 lblError.Text = "보안코드가 틀립니다. 다시 입력하세요.";
+            }
+        }
+
+        /// <summary>
+        /// 추가 : 파일 업로드 처리
+        /// </summary>
+        private void UploadFile()
+        {
+            _BaseDir = Server.MapPath("../Files"); // D:\GitRepository\StudyAspNet21\DotNetNote\DotNetNote\Files
+            _FileName = "";
+            _FileSize = 0;
+
+            if (txtFileName.PostedFile != null)
+            {
+                if (txtFileName.PostedFile.FileName.Trim().Length > 0 && txtFileName.PostedFile.ContentLength > 0)
+                {
+                    if (FormType == BoardWriteFormType.Modify) // 수정인 경우
+                    {
+                        ViewState["FileName"] = Helpers.FileUtility.GetFileNameWithNumbering(_BaseDir, Path.GetFileName(txtFileName.PostedFile.FileName));
+                        ViewState["FileSize"] = txtFileName.PostedFile.ContentLength;
+                        // 업로드
+                        txtFileName.PostedFile.SaveAs(Path.Combine(_BaseDir, ViewState["FileName"].ToString()));
+                    }
+                    else // Write, Reply
+                    {
+                        // 폴더 이미 test.txt 있는 경우 뒤에 (1)붙여줌
+                        _FileName = Helpers.FileUtility.GetFileNameWithNumbering(_BaseDir, Path.GetFileName(txtFileName.PostedFile.FileName));
+                        _FileSize = txtFileName.PostedFile.ContentLength;
+                        // 업로드
+                        txtFileName.PostedFile.SaveAs(Path.Combine(_BaseDir, _FileName));
+                    }
+                }
+                
             }
         }
         #endregion

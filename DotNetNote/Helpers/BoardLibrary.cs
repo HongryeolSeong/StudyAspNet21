@@ -176,7 +176,7 @@ namespace Helpers
             {
                 if (strFileName.Length > 0)
                 {
-                    return "<a href=\"/DotNetNote/BoardDown.aspx?Id="
+                    return "<a href=\"BoardDown.aspx?Id="
                         + id.ToString() + "\">"
                         + DownloadType(strFileName, strFileName + "("
                         + ConvertToFileSize(Convert.ToInt32(strFileSize)) + ")")
