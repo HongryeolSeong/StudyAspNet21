@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor hca
+
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
         <div class="navbar-translate">
             <a class="navbar-brand" href="~/Home/Index">
@@ -15,30 +18,41 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Profile">
-                        <i class="material-icons">assignment_ind</i> Profile
+                        <i class="material-icons">assignment_ind</i>Profile
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Portpolio">
-                        <i class="material-icons">assignment</i> Portpolio
+                        <i class="material-icons">assignment</i>Portpolio
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">
-                        <i class="material-icons">call</i> Contact
+                    <a class="nav-link" asp-area="" asp-controller="Contacts" asp-action="Index">
+                        <i class="material-icons">phone</i>Contact
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Board">
-                        <i class="material-icons">dashboard_customize</i> Board
+                    <a class="nav-link" asp-area="" asp-controller="Board" asp-action="index">
+                        <i class="material-icons">dashboard_customized</i>Board
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Login">
-                        <i class="material-icons">login</i> Login
-                    </a>
-                </li>
-                @*<partial name="_LoginPartial" />*@
+                @if (string.IsNullOrEmpty(hca.HttpContext.Session.GetString("UserEmail")))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">
+                            <i class="material-icons">lock_open</i>Login
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">
+                            <i class="material-icons">lock</i>Logout(@hca.HttpContext.Session.GetString("UserEmail"))
+                        </a>
+                    </li>
+                }
+
             </ul>
         </div>
     </div>
