@@ -13,9 +13,10 @@ namespace MyPortpolio.Data
             : base(options)
         {
         }
-        public DbSet<MyPortpolio.Models.Contact> Contact { get; set; }
+        public DbSet<MyPortpolio.Models.Contact> Contacts { get; set; }
         public DbSet<MyPortpolio.Models.Account> Account { get; set; }
         public DbSet<MyPortpolio.Models.Board> Boards { get; set; }
+        public DbSet<MyPortpolio.Models.Manage> Manages { get; set; }
 
     }
 }

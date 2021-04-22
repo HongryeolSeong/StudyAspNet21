@@ -7,11 +7,10 @@
 
 <div class="col-lg col-md ml-auto mr-auto">
     <div class="card card-login">
-        <div class="section section-contacts">
+        <div class="section section-contacts" style="padding:20px;">
             <div class="row">
                 <div class="col-md-11 ml-auto mr-auto">
-                    <h3 class="text-center title" style="color:black">Board</h3>
-                    <form class="contact-form">
+                    <h3 class="text-center" style="font-weight:bold; color:black; margin-top:0px">Board</h3>
                         <dl class="row">
                             <dt class="col-sm-2">
                                 @Html.DisplayNameFor(model => model.Subject)
@@ -23,7 +22,7 @@
                                 @Html.DisplayNameFor(model => model.Contents)
                             </dt>
                             <dd class="col-sm-10">
-                                @Html.DisplayFor(model => model.Contents)
+                                @Html.Raw(Model.Contents)
                             </dd>
                             <dt class="col-sm-2">
                                 @Html.DisplayNameFor(model => model.Writer)
@@ -46,9 +45,8 @@
                         </dl>
                         <div>
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>&nbsp;
-                            <a asp-action="Index" class="btn btn-secondary">리스트</a>
+                            <a asp-action="Index" class="btn btn-success">리스트</a>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>

@@ -37,7 +37,7 @@ namespace MyPortpolio.Controllers
                     _context.Add(contact);
                     await _context.SaveChangesAsync();
 
-                    ViewBag.Message = "감사합니다. 연락 드리겠습니다.";
+                    ViewBag.Message = "감사합니다. 연락드리겠습니다.";
                 }
                 catch (Exception ex)
                 {
