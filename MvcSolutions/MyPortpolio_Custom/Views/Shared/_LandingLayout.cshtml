@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("HeadPage.cshtml")
+
+<body class="landing-page sidebar-collapse">
+    @Html.Partial("NavPage.cshtml")
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/DigitalPortfolio.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <h1 class="title">Your Story Starts With Me.</h1>
+                    <h4>제 포트폴리오를 소개하는 개인 웹 페이지입니다.</h4>
+                    <br>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("FooterPage.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

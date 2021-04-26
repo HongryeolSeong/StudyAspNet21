@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@Html.Partial("HeadPage.cshtml")
+
+<body class="profile-page sidebar-collapse">
+    @Html.Partial("NavPage.cshtml")
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('../assets/img/back.png');">
+        <div class="col-md-10 ml-auto mr-auto text-center">
+            <h2 class="title" style="color:black">Portpolio</h2>
+            <h5 class="description" style="color:black">작업했던 포트폴리오들 입니다.</h5>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @Html.Partial("FooterPage.cshtml")
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
