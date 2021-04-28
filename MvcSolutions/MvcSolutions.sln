@@ -17,11 +17,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TotalDatabase", "TotalDatab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewPortpolio", "NewPortpolio\NewPortpolio.csproj", "{18A02CB9-A6DE-4AF1-AAD1-9AD8A379BCDB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{63528955-0511-4748-9A56-967BD822D242}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPortpolio_Custom", "MyPortpolio_Custom\MyPortpolio_Custom.csproj", "{CD783047-EAA9-4833-AEB6-C848B00F75AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyPortfolio_Oneself", "MyPortfolio_Oneself\MyPortfolio_Oneself.csproj", "{E22B4350-01B5-40A9-85E7-63FB40D9E1B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPortfolio_Oneself", "MyPortfolio_Oneself\MyPortfolio_Oneself.csproj", "{E22B4350-01B5-40A9-85E7-63FB40D9E1B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +57,6 @@ Global
 		{18A02CB9-A6DE-4AF1-AAD1-9AD8A379BCDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18A02CB9-A6DE-4AF1-AAD1-9AD8A379BCDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18A02CB9-A6DE-4AF1-AAD1-9AD8A379BCDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{63528955-0511-4748-9A56-967BD822D242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{63528955-0511-4748-9A56-967BD822D242}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{63528955-0511-4748-9A56-967BD822D242}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{63528955-0511-4748-9A56-967BD822D242}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CD783047-EAA9-4833-AEB6-C848B00F75AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD783047-EAA9-4833-AEB6-C848B00F75AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD783047-EAA9-4833-AEB6-C848B00F75AA}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -24,7 +24,7 @@ namespace MyPortpolio.Controllers
         public async Task<IActionResult> Index(int? page)
         {
             var pageNumber = page ?? 1; // page 값이 null이면 1
-            var pageSize = 5;
+            var pageSize = 7;
 
             var boards = await _context.Boards.ToPagedListAsync(pageNumber, pageSize);
             return View(boards);
