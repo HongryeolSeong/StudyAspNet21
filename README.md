@@ -31,7 +31,7 @@ ASP.NET 학습 리포지토리
 <br>
 
 ##### 3. 컨택트
-###### - 데이터베이스의 Contact테이블을 활용한 Contact탭
+###### - 데이터베이스의 Contact테이블을 활용한 채용 문의 탭
 
 ![결과4](https://github.com/HongryeolSeong/StudyAspNet21/blob/main/resimg/contact.png "컨택트")
 <br>
