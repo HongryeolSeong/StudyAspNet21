@@ -3,8 +3,7 @@ ASP.NET 학습 리포지토리
 
 
 ## Project
-- BookRentalShop Application
-- SQL데이터베이스와 연동
+- Bootstrap 4 템플릿을 활용한 포트폴리오페이지
 - [프로젝트소스](https://github.com/HongryeolSeong/StudyAspNet21/tree/main/MvcSolutions/MyPortfolio_Oneself)
 
 ---
